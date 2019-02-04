@@ -1,0 +1,348 @@
+@import './normalize';
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+TC:700|Open+Sans:400,700');
+
+$desktop: '(min-width: 1200px)' !default;
+$tablet-landscape: '(min-width: 900px)' !default;
+$tablet-portrait: '(min-width: 600px)' !default;
+@mixin media($query: $desktop) {
+  @media #{$query} {
+    @content;
+  }
+}
+%border {
+  border: 3px solid #000;
+}
+%fontNotoSans {
+  font-family: 'Noto Sans', sans-serif;
+}
+%fontOpenSans {
+  font-family: 'Open Sans', sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+  background-color: #f0f0f0;
+}
+#app {
+  max-width: 1280px;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+}
+.header {
+  @include media($tablet-portrait) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  @include media($tablet-landscape) {
+    flex-direction: row;
+  }
+}
+.main {
+  text-align: center;
+  padding: {
+    left: 15px;
+    right: 15px;
+  }
+  box-sizing: border-box;
+  &__title {
+    @extend %fontNotoSans;
+    font-weight: 700;
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 0;
+    @include media($tablet-landscape) {
+      font-size: 40px;
+    }
+  }
+  &__ddlZone {
+    @extend %border;
+    max-width: 350px;
+    width: 100%;
+    height: 56px;
+    color: #000;
+    @extend %fontNotoSans;
+    font-weight: 700;
+    font-size: 18px;
+    padding-left: 20px;
+    margin: {
+      top: 16px;
+      bottom: 0px;
+    }
+  }
+}
+.airRange {
+  padding: 15px;
+  box-sizing: border-box;
+  @include media($tablet-portrait) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  > li {
+    box-sizing: border-box;
+    list-style: none;
+    display: flex;
+    text-align: center;
+    @extend %border;
+    margin: {
+      top: 0;
+      bottom: -3px;
+    }
+    @include media($tablet-portrait) {
+      display: flex;
+      flex-direction: column;
+      width: 33%;
+      margin: {
+        bottom: -3px;
+        right: -3px;
+      }
+    }
+    @include media($tablet-landscape) {
+      width: 120px;
+    }
+    @include media($desktop) {
+      width: 135px;
+    }
+  }
+  &__num {
+    @extend %fontOpenSans;
+    font-weight: 700;
+    width: 40%;
+    padding: 10px;
+    border-right: 3px solid #000;
+    box-sizing: border-box;
+    @include media($tablet-portrait) {
+      width: 100%;
+      border-right: none;
+      border-bottom: 3px solid #000;
+    }
+  }
+  &__status {
+    @extend %fontNotoSans;
+    font-weight: 700;
+    width: 60%;
+    padding: 10px;
+    box-sizing: border-box;
+    @include media($tablet-portrait) {
+      width: 100%;
+      height: 56px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+.separate {
+  width: 100%;
+  padding: {
+    left: 15px;
+    right: 15px;
+  }
+  margin: {
+    top: 16px;
+    bottom: 16px;
+  }
+  @include media($tablet-portrait) {
+    margin: {
+      top: 32px;
+      bottom: 32px;
+    }
+  }
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:before {
+    content: '';
+    display: inline-block;
+    border-top: 3px dotted #000;
+    margin: {
+      right: 15px;
+      left: 10px;
+    }
+    flex-grow: 1;
+    order: 1;
+  }
+  &__currentZone {
+    @extend %fontNotoSans;
+    font-weight: 700;
+    font-size: 24px;
+    @include media($tablet-portrait) {
+      font-size: 36px;
+    }
+  }
+  &__updateTime {
+    @extend %fontNotoSans;
+    font-weight: 700;
+    order: 2;
+  }
+}
+.content {
+  @include media($tablet-landscape) {
+    display: flex;
+  }
+  &__detail {
+    opacity: 0;
+    height: 0;
+    width: 0;
+    @include media($tablet-landscape) {
+      opacity: 1;
+      height: auto;
+      margin-left: 15px;
+      flex-basis: 0px;
+      flex-grow: 1;
+    }
+  }
+  &__list {
+    margin: 0;
+    padding: {
+      left: 15px;
+      right: 15px;
+    }
+    @include media($tablet-portrait) {
+      display: flex;
+      flex-wrap: wrap;
+      align-content: flex-start;
+      flex-basis: 0px;
+      flex-grow: 2;
+    }
+    > li {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      @include media($tablet-portrait) {
+        width: calc(50% - 32px);
+        margin: {
+          left: 16px;
+          right: 16px;
+        }
+      }
+      > .content__info {
+        @include media($tablet-landscape) {
+          // opacity: 0 !important;
+          // width: 0 !important;
+          // height: 0 !important;
+          display: none;
+        }
+      }
+    }
+  }
+  &__zone {
+    display: flex;
+    @extend %border;
+    height: 97px;
+    width: 100%;
+    margin-bottom: 32px;
+    cursor: pointer;
+    &__name {
+      box-sizing: border-box;
+      @extend %fontOpenSans;
+      font-weight: 700;
+      font-size: 36px;
+      flex-grow: 2;
+      flex-basis: 0;
+      border-right: 3px solid #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    &__aqi {
+      box-sizing: border-box;
+      @extend %fontNotoSans;
+      font-weight: 700;
+      font-size: 48px;
+      flex-grow: 1.5;
+      flex-basis: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  &__info {
+    width: 100%;
+    border: {
+      right: 3px solid #000;
+      left: 3px solid #000;
+      bottom: 3px solid #000;
+    }
+    margin: {
+      top: -32px;
+      bottom: 32px;
+    }
+    padding: {
+      top: 14px;
+      left: 0;
+    }
+    > li {
+      list-style: none;
+      margin: {
+        top: 16px;
+        left: 30px;
+        right: 30px;
+      }
+      padding-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 3px solid rgba(#000, 0.5);
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+    &__left {
+      display: flex;
+      flex-direction: column;
+      @include media($desktop) {
+        flex-direction: row;
+        align-items: center;
+      }
+    }
+    &__ch {
+      @extend %fontNotoSans;
+      font-weight: 700;
+      font-size: 24px;
+      margin-right: 8px;
+    }
+    &__en {
+      @extend %fontOpenSans;
+    }
+    &__num {
+      @extend %fontOpenSans;
+      font-weight: 700;
+      font-size: 24px;
+    }
+  }
+}
+
+.aqi-0 {
+  background-color: #95f084;
+}
+.aqi-51 {
+  background-color: #ffe695;
+}
+.aqi-101 {
+  background-color: #ffaf6a;
+}
+.aqi-151 {
+  background-color: #ff5757;
+}
+.aqi-201 {
+  background-color: #9777ff;
+}
+.aqi-301 {
+  background-color: #ad1774;
+}
+.slide-fade-enter-active {
+  transition: all 0.3s ease;
+}
+.slide-fade-leave-active {
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter,
+.slide-fade-leave-to {
+  opacity: 0;
+  transform: translateX(-500px);
+}

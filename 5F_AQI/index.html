@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="./dist/style/all.min.css" />
+    <title>5F - AQI</title>
+  </head>
+  <body>
+    <div id="app">
+      <header class="header">
+        <div class="main">
+          <h1 class="main__title">空氣品質指標(AQI)</h1>
+          <select class="main__ddlZone" v-model="currentCountyName">
+            <option disabled selected>請選擇地區</option>
+            <option
+              :value="county"
+              :selected="county === currentCountyName"
+              v-for="county in countyList"
+            >
+              {{ county }}
+            </option>
+          </select>
+        </div>
+        <ul class="airRange">
+          <li v-for="range in rangeData" :key="range.min">
+            <div class="airRange__num" :class="[range.colorClass]">
+              {{ `${range.min} ~ ${range.max}` }}
+            </div>
+            <div class="airRange__status">{{ range.status }}</div>
+          </li>
+        </ul>
+      </header>
+      <div class="separate">
+        <div class="separate__currentZone">{{ currentCountyName }}</div>
+        <div class="separate__updateTime" v-if="publishTime">
+          {{ publishTime }} 更新
+        </div>
+      </div>
+      <main class="content">
+        <div class="content__detail" v-if="currentSite">
+          <aqi-site :zone="currentSite"></aqi-site>
+          <aqi-detail :aqi="currentSite"></aqi-detail>
+        </div>
+        <ul class="content__list">
+          <li v-for="zone in currentCounty" @click="clickZone(zone.SiteName)">
+            <aqi-site :zone="zone"></aqi-site>
+            <transition name="slide-fade">
+              <aqi-detail :aqi="zone" v-if="zone.active"></aqi-detail>
+            </transition>
+          </li>
+        </ul>
+      </main>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch-jsonp/1.1.3/fetch-jsonp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.22/vue.js"></script>
+    <script src="./script/all.js"></script>
+  </body>
+</html>
