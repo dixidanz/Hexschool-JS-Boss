@@ -1,0 +1,36 @@
+@import './normalize';
+
+$bgColor: #293b29;
+
+html,
+body {
+  background-color: $bgColor;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.clock {
+  background-image: url(../../img/clock-bg.svg);
+  background-position: center;
+  border-radius: 80px;
+  width: 350px;
+  height: 350px;
+  position: relative;
+}
+.hand {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transition: all 0.05s;
+  transition-timing-function: cubic-bezier(0, 2.95, 1, 1);
+}
+.hour {
+  transform-origin: 0 0;
+}
+.minute {
+  transform-origin: 50% 0;
+}
+.second {
+  transform-origin: 50% 0;
+}
