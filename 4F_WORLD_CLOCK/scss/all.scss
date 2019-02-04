@@ -1,0 +1,110 @@
+@import './normalize';
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700,700i,800');
+$tablet-portrait: '(min-width: 600px)' !default;
+@mixin media($query: $desktop) {
+  @media #{$query} {
+    @content;
+  }
+}
+
+$bgColor: #e5e5e5;
+$dark: #000;
+$light: #fff;
+
+body,
+html {
+  font-family: 'Open Sans', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  @include media($tablet-portrait) {
+    height: 100%;
+  }
+}
+.title {
+  font-size: 2.5rem;
+  color: $dark;
+  max-width: 540px;
+  font-weight: 800;
+  margin: {
+    top: 0;
+    bottom: 35px;
+  }
+  @include media($tablet-portrait) {
+    font-size: 4.5rem;
+  }
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 10px;
+    background-color: $dark;
+  }
+}
+.warp {
+  max-width: 540px;
+  width: 100%;
+}
+.zone {
+  padding: 0;
+  width: 100%;
+  box-shadow: 0px 0px 50px rgba(#000, 0.16);
+  > li {
+    list-style: none;
+    border: 2px solid $dark;
+    width: 100%;
+    &.bgDark {
+      background-color: $dark;
+      color: $light;
+    }
+    &.bgLight {
+      background-color: $light;
+      color: $dark;
+    }
+    @include media($tablet-portrait) {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  &__left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: {
+      top: 16px;
+      left: 20px;
+    }
+    @include media($tablet-portrait) {
+      margin-left: 40px;
+    }
+  }
+  &__right {
+    text-align: right;
+    margin: {
+      top: 10px;
+      right: 20px;
+      bottom: 16px;
+    }
+    @include media($tablet-portrait) {
+      margin-right: 40px;
+    }
+  }
+  &__name {
+    font-size: 36px;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+  }
+  &__date {
+    font-weight: 700;
+    font-style: italic;
+    margin-top: 5px;
+  }
+  &__time {
+    font-size: 72px;
+    font-weight: 700;
+    margin: 0;
+  }
+}
