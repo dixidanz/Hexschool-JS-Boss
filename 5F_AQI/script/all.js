@@ -151,6 +151,8 @@
         let statusColor = this.rangeData.filter(range => {
           return range.status === status
         })
+        if (!statusColor[0]) return ''
+
         return statusColor[0].colorClass
       },
       clickZone(site) {
