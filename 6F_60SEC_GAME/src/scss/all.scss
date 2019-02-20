@@ -1,0 +1,203 @@
+@import './normalize';
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i');
+$primary: #ff9d00;
+$secondary: #000000;
+$light: #ffffff;
+
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hide {
+  display: none;
+}
+
+html,
+body {
+  font-family: 'Roboto Condensed', sans-serif;
+  background-color: $primary;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.btn {
+  width: 350px;
+  height: 58px;
+  background-color: $secondary;
+  color: $primary;
+  font-size: 36px;
+  font-weight: 700;
+  margin: 0 auto;
+  cursor: pointer;
+  @include flexCenter;
+  &:hover {
+    background-color: lighten($secondary, 10%);
+  }
+}
+.opening {
+  &__title {
+    @include flexCenter;
+    margin-bottom: 104px;
+    &__left {
+      font-size: 240px;
+      color: $light;
+      text-shadow: 12px 0 0 $secondary;
+      margin-right: 24px;
+      font-weight: 700;
+    }
+    &__right {
+      display: flex;
+      flex-direction: column;
+    }
+    &__top {
+      @include flexCenter;
+    }
+    &__text {
+      font-size: 96px;
+      font-weight: 700;
+    }
+    &__operation {
+      font-size: 44px;
+      font-weight: 700;
+      color: $light;
+      border-bottom: 10px double $light;
+      margin-left: 10px;
+    }
+  }
+  &__start {
+  }
+  &__description {
+    @include flexCenter;
+    margin-top: 5px;
+    color: $light;
+    font-size: 24px;
+    font-style: italic;
+    font-weight: 300;
+  }
+}
+
+.game {
+  &__info {
+    margin-bottom: 114px;
+    display: flex;
+  }
+  &__left {
+    display: flex;
+    flex-direction: column;
+  }
+  &__title {
+    font-size: 30px;
+    line-height: 30px;
+    font-weight: 700;
+    border: 4px solid $light;
+    color: $light;
+    padding: 8px;
+  }
+  &__score {
+    display: flex;
+    &__text {
+      background-color: $light;
+      padding: 8px;
+      font-size: 30px;
+      line-height: 30px;
+      font-weight: 700;
+      color: $primary;
+    }
+    &__num {
+      font-size: 44px;
+      font-weight: 700;
+      line-height: 44px;
+      margin-left: 8px;
+      margin-top: 4px;
+    }
+  }
+  &__time {
+    margin-left: 128px;
+    font-size: 96px;
+    color: $light;
+    font-weight: 700;
+    font-style: italic;
+  }
+  &__topic {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    &__num {
+      font-size: 112px;
+      font-weight: 700;
+    }
+    &__operation {
+      font-size: 112px;
+      font-weight: 700;
+      color: $light;
+    }
+    &__answer {
+      width: 255px;
+      height: 141px;
+      font-size: 112px;
+      font-weight: 700;
+      text-align: center;
+      outline: none;
+      color: $primary;
+    }
+    &__description {
+      position: absolute;
+      right: 30px;
+      bottom: -28px;
+      font-weight: 300;
+      font-size: 24px;
+      font-style: italic;
+      color: $light;
+    }
+  }
+}
+
+.end {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &__title {
+    max-width: 342px;
+    font-size: 30px;
+    line-height: 30px;
+    font-weight: 700;
+    border: 4px solid $light;
+    color: $light;
+    padding: 8px;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  &__FinalScore {
+    font-size: 56px;
+    font-weight: 700;
+    position: relative;
+    margin-bottom: 16px;
+    &:before,
+    &:after {
+      content: '—';
+    }
+    &:before {
+      margin-right: 10px;
+    }
+    &:after {
+      margin-left: 10px;
+    }
+  }
+  &__score {
+    font-size: 112px;
+    font-weight: 700;
+    margin-bottom: 104px;
+  }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}

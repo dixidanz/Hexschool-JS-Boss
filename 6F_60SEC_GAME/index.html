@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="./dist/style/all.min.css" />
+    <title>6F_60SEC GAME</title>
+  </head>
+  <body>
+    <div id="app">
+      <transition name="fade" mode="out-in">
+        <div class="opening" v-if="currentPage === 'opening'" key="opening">
+          <div class="opening__title">
+            <div class="opening__title__left">60</div>
+            <div class="opening__title__right">
+              <div class="opening__title__top">
+                <div class="opening__title__text">SECONDS</div>
+                <div class="opening__title__operation">+−×÷</div>
+              </div>
+              <div class="opening__title__text">CHALLENGE</div>
+            </div>
+          </div>
+          <div class="btn" @click="startGame">START!</div>
+          <div class="opening__description">try to answer more as you can</div>
+        </div>
+        <div class="game" v-if="currentPage === 'game'" key="game">
+          <div class="game__info">
+            <div class="game__left">
+              <div class="game__title">60 SECONDS CHALLENGE</div>
+              <div class="game__score">
+                <div class="game__score__text">SCORE</div>
+                <div class="game__score__num">{{ addZero(score, 3) }}</div>
+              </div>
+            </div>
+            <div class="game__time">{{ gameTimer }}</div>
+          </div>
+          <div class="game__topic">
+            <div class="game__topic__num">{{ number1 }}</div>
+            <div class="game__topic__operation">{{ operation }}</div>
+            <div class="game__topic__num">{{ number2 }}</div>
+            <div class="game__topic__operation">=</div>
+            <input
+              type="text"
+              class="game__topic__answer"
+              v-model="playerAnswer"
+              v-focus
+              @keyup.enter="play"
+            />
+            <div class="game__topic__description">press enter to answer</div>
+          </div>
+        </div>
+        <div class="end" v-if="currentPage === 'end'" key="end">
+          <div class="end__title">60 SECONDS CHALLENGE</div>
+          <div class="end__FinalScore">YOUR FINAL SCORE</div>
+          <div class="end__score">{{ score }}</div>
+          <div class="btn" @click="currentPage = 'opening'">TRY AGAIN!</div>
+        </div>
+      </transition>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.6/vue.js"></script>
+    <script src="./dist/script/main.js"></script>
+  </body>
+</html>
