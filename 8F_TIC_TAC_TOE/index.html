@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="./dist/style/all.min.css" />
+    <title>8F_TIC_TAC_TOE</title>
+  </head>
+  <body>
+    <div id="app" :style="pageColor">
+      <div class="container" v-if="page === 'hall'">
+        <ul class="gridHall">
+          <li>TIC</li>
+          <li></li>
+          <li><div></div></li>
+          <li>4</li>
+          <li>TAC</li>
+          <li>6</li>
+          <li>7</li>
+          <li>8</li>
+          <li>TOE</li>
+        </ul>
+        <app-button
+          font-color="#FF6D70"
+          background-color="#fff"
+          @btn-handler="startGame"
+        >
+          START
+        </app-button>
+      </div>
+      <div class="container" v-if="page === 'game'">
+        <div class="score">
+          <div
+            class="score__crossText"
+            :class="{'turnColor' : turn === 1}"
+          ></div>
+          <div class="score__Num">{{ score.cross }}</div>
+          <div class="score__vs" @click="resetScore">vs</div>
+          <div class="score__Num">{{ score.circle }}</div>
+          <div
+            class="score__circleText"
+            :class="{'turnColor' : turn === 10}"
+          ></div>
+          <span class="score__yourTurn" :class="{'circleTurn' : turn === 10}"
+            >YOUR TURN!
+          </span>
+        </div>
+
+        <ul class="gridGame" v-if="winner === null">
+          <li
+            v-for="(item, index) in sections"
+            :key="index"
+            :class="{cross: item === 1, circle: item === 10}"
+            @click="playHandler(index)"
+          ></li>
+        </ul>
+        <div class="winnerCross" v-if="winner === 'x'">
+          <span class="winnerStroke">WINNER!</span>
+        </div>
+        <div class="winnerCircle " v-if="winner === 'o'">
+          <span class="winnerStroke">WINNER!</span>
+        </div>
+        <div class="winnerDraw" v-if="winner === 'no'">
+          <div class="winnerDraw__cross"></div>
+          <div class="winnerDraw__circle"></div>
+          <span class="winnerStroke">DRAW! DRAW! DRAW!</span>
+        </div>
+        <app-button
+          font-color="#fff"
+          background-color="#ED494C"
+          @btn-handler="restartGame"
+        >
+          RESTART
+        </app-button>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.8/vue.js"></script>
+    <script src="./dist/js/main.js"></script>
+  </body>
+</html>

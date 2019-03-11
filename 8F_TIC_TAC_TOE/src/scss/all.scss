@@ -1,0 +1,430 @@
+@import './normalize';
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,700i');
+
+$primary: #ff6d70;
+$secondary: #ed494c;
+$tablet-landscape: '(min-width: 900px)' !default;
+$tablet-portrait: '(min-width: 600px)' !default;
+@mixin media($query: $desktop) {
+  @media #{$query} {
+    @content;
+  }
+}
+@mixin circle($wh, $color) {
+  width: $wh;
+  height: $wh;
+  background-color: $color;
+  border-radius: 50%;
+}
+@mixin cross($w, $h, $color) {
+  position: relative;
+  &:before,
+  &:after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+  &:before {
+    width: $w;
+    height: $h;
+    background-color: $color;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  &:after {
+    width: $w;
+    height: $h;
+    background-color: $color;
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+}
+@mixin positionCenter() {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+html,
+body {
+  font-family: 'Roboto Condensed', sans-serif;
+}
+#app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+.container {
+  width: 100%;
+  margin: auto;
+  max-width: 310px;
+  @include media($tablet-portrait) {
+    max-width: 540px;
+  }
+}
+.gridHall {
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  > li {
+    list-style: none;
+    max-width: 100px;
+    line-height: 100px;
+    margin-bottom: 5px;
+    text-align: center;
+    width: 100%;
+    @include media($tablet-portrait) {
+      max-width: 160px;
+      line-height: 160px;
+      margin-bottom: 30px;
+    }
+    &:nth-child(1),
+    &:nth-child(5),
+    &:nth-child(9) {
+      font-size: 60px;
+      @include media($tablet-portrait) {
+        font-size: 100px;
+      }
+      font-weight: 700;
+      font-style: italic;
+      color: #fff;
+    }
+    &:nth-child(2) {
+      position: relative;
+      &:before,
+      &:after {
+        content: '';
+        display: block;
+        @include positionCenter;
+      }
+      &:before {
+        @include circle(80px, $primary);
+        @include media($tablet-portrait) {
+          @include circle(120px, $primary);
+        }
+      }
+      &:after {
+        @include circle(60px, #000);
+        @include media($tablet-portrait) {
+          @include circle(90px, #000);
+        }
+      }
+    }
+    &:nth-child(3) {
+      @include cross(80px, 15px, #fff);
+      @include media($tablet-portrait) {
+        @include cross(120px, 20px, #fff);
+      }
+      > div {
+        @include positionCenter;
+        @include cross(75px, 10px, #000);
+        @include media($tablet-portrait) {
+          @include cross(115px, 13px, #000);
+        }
+        z-index: 2;
+      }
+    }
+    &:nth-child(4),
+    &:nth-child(8) {
+      @include cross(80px, 15px, $primary);
+      @include media($tablet-portrait) {
+        @include cross(120px, 20px, $primary);
+      }
+    }
+    &:nth-child(6),
+    &:nth-child(7) {
+      position: relative;
+      &:before,
+      &:after {
+        content: '';
+        display: block;
+        @include positionCenter;
+      }
+      &:before {
+        @include circle(80px, #000);
+        @include media($tablet-portrait) {
+          @include circle(120px, #000);
+        }
+        border: 4px solid $primary;
+      }
+      &:after {
+        @include circle(50px, #000);
+        @include media($tablet-portrait) {
+          @include circle(90px, #000);
+        }
+        border: 4px solid $primary;
+      }
+    }
+  }
+}
+
+.score {
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+  margin-bottom: 56px;
+  .turnColor {
+    background-color: $secondary;
+  }
+  &__crossText {
+    background-color: #000;
+    width: 64px;
+    height: 64px;
+    border: 3px solid #000;
+    border-radius: 8px 0 0 8px;
+    @include cross(30px, 5px, #fff);
+    @include media($tablet-portrait) {
+      @include cross(50px, 5px, #fff);
+    }
+    box-sizing: border-box;
+  }
+  &__Num {
+    background-color: #fff;
+    color: #000;
+    font-size: 48px;
+    font-weight: 700;
+    border: 3px solid #000;
+    border-left: none;
+    border-right: none;
+    width: 179px;
+    height: 64px;
+    text-align: center;
+    box-sizing: border-box;
+  }
+  &__vs {
+    font-size: 20px;
+    font-weight: 700;
+    background-color: #000;
+    color: #fff;
+    width: 70px;
+    line-height: 70px;
+    border-radius: 8px 8px 0 0;
+    text-align: center;
+  }
+  &__circleText {
+    background-color: #000;
+    width: 64px;
+    height: 64px;
+    border-radius: 0 8px 8px 0;
+    border: 3px solid #000;
+    box-sizing: border-box;
+    position: relative;
+    &:before,
+    &:after {
+      content: '';
+      display: block;
+      @include positionCenter;
+    }
+    &:before {
+      @include circle(30px, #fff);
+      @include media($tablet-portrait) {
+        @include circle(40px, #fff);
+      }
+    }
+    &:after {
+      @include circle(20px, #000);
+      @include media($tablet-portrait) {
+        @include circle(30px, #000);
+      }
+    }
+    &.turnColor {
+      &:after {
+        background-color: $secondary;
+      }
+    }
+  }
+  &__yourTurn {
+    position: absolute;
+    bottom: -25px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    &.circleTurn {
+      right: 0;
+    }
+  }
+}
+
+.gridGame {
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  > li {
+    list-style: none;
+    max-width: 103px;
+    height: 100px;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.5;
+    @include media($tablet-portrait) {
+      max-width: 180px;
+      height: 180px;
+    }
+    &.cross {
+      @include cross(50px, 5px, #fff);
+      @include media($tablet-portrait) {
+        @include cross(70px, 7px, #fff);
+      }
+    }
+    &.circle {
+      position: relative;
+      &:before,
+      &:after {
+        content: '';
+        display: block;
+        @include positionCenter;
+      }
+      &:before {
+        @include circle(50px, #000);
+        @include media($tablet-portrait) {
+          @include circle(80px, #000);
+        }
+      }
+      &:after {
+        @include circle(40px, $primary);
+        @include media($tablet-portrait) {
+          @include circle(65px, $primary);
+        }
+      }
+    }
+    &:nth-child(1) {
+      border-right: 5px solid $secondary;
+      border-bottom: 5px solid $secondary;
+    }
+    &:nth-child(2) {
+      border-bottom: 5px solid $secondary;
+    }
+    &:nth-child(3) {
+      border-left: 5px solid $secondary;
+      border-bottom: 5px solid $secondary;
+    }
+    &:nth-child(4) {
+      border-right: 5px solid $secondary;
+    }
+    &:nth-child(6) {
+      border-left: 5px solid $secondary;
+    }
+    &:nth-child(7) {
+      border-right: 5px solid $secondary;
+      border-top: 5px solid $secondary;
+    }
+    &:nth-child(8) {
+      border-top: 5px solid $secondary;
+    }
+    &:nth-child(9) {
+      border-left: 5px solid $secondary;
+      border-top: 5px solid $secondary;
+    }
+  }
+}
+
+.winnerCross {
+  max-width: 540px;
+  padding: 150px 0;
+  @include cross(300px, 30px, $secondary);
+  @include media($tablet-portrait) {
+    padding: 300px 0;
+    @include cross(450px, 50px, $secondary);
+  }
+}
+.winnerCircle {
+  max-width: 540px;
+  padding: 150px 0;
+  @include media($tablet-portrait) {
+    padding: 300px 0;
+  }
+  position: relative;
+  &:before,
+  &:after {
+    content: '';
+    display: block;
+    @include positionCenter;
+  }
+  &:before {
+    @include circle(250px, $secondary);
+    @include media($tablet-portrait) {
+      @include circle(450px, $secondary);
+    }
+  }
+  &:after {
+    @include circle(200px, $primary);
+    @include media($tablet-portrait) {
+      @include circle(350px, $primary);
+    }
+  }
+}
+.winnerDraw {
+  max-width: 540px;
+  padding: 150px 0;
+  @include media($tablet-portrait) {
+    padding: 300px 0;
+  }
+  position: relative;
+  display: flex;
+  &__cross {
+    width: 50%;
+    @include cross(150px, 20px, $secondary);
+    @include media($tablet-portrait) {
+      @include cross(200px, 20px, $secondary);
+    }
+  }
+  &__circle {
+    width: 50%;
+    position: relative;
+    &:before,
+    &:after {
+      content: '';
+      display: block;
+      @include positionCenter;
+    }
+    &:before {
+      @include circle(150px, $secondary);
+      @include media($tablet-portrait) {
+        @include circle(200px, $secondary);
+      }
+    }
+    &:after {
+      @include circle(110px, $primary);
+      @include media($tablet-portrait) {
+        @include circle(150px, $primary);
+      }
+    }
+  }
+}
+.winnerStroke {
+  @include positionCenter;
+  z-index: 2;
+  font-weight: 700;
+  font-style: italic;
+  color: transparent;
+  -webkit-text-stroke: 4px #fff;
+  font-size: 80px;
+  @include media($tablet-portrait) {
+    font-size: 154px;
+  }
+}
+.btn {
+  max-width: 540px;
+  width: 100%;
+  font-weight: 700;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  font-size: 36px;
+  height: 70px;
+  margin-top: 20px;
+  @include media($tablet-portrait) {
+    font-size: 48px;
+    height: 89px;
+    margin-top: 40px;
+  }
+}
