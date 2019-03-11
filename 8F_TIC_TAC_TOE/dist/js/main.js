@@ -42,7 +42,7 @@
     data() {
       return {
         step: 0,
-        page: 'game',
+        page: 'hall',
         turn: 1, //1x 10o
         sections: [0, 0, 0, 0, 0, 0, 0, 0, 0], //1x 10o
         score: {}
