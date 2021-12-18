@@ -1,4 +1,4 @@
-;(function(Vue) {
+; (function (Vue) {
   Vue.component('aqi-detail', {
     props: {
       aqi: {
@@ -68,7 +68,7 @@
 
   let vm = new Vue({
     el: '#app',
-    data() {
+    data () {
       return {
         currentCountyName: '請選擇地區',
         currentSiteName: '',
@@ -114,7 +114,7 @@
       }
     },
     computed: {
-      countyList() {
+      countyList () {
         //縣市列表
         let county = new Set()
         this.aqiData.forEach(data => {
@@ -122,12 +122,12 @@
         })
         return Array.from(county)
       },
-      publishTime() {
+      publishTime () {
         //更新時間
         if (!this.aqiData[0]) return false
         return this.aqiData[0].PublishTime
       },
-      currentCounty() {
+      currentCounty () {
         //選擇的鄉鎮列表
         let zoneData = this.aqiData.filter(data => {
           return data.County === this.currentCountyName
@@ -137,7 +137,7 @@
           return data
         })
       },
-      currentSite() {
+      currentSite () {
         //選擇的鄉鎮
         if (!this.currentSiteName) return this.currentCounty[0]
         let siteData = this.currentCounty.filter(data => {
@@ -147,7 +147,7 @@
       }
     },
     methods: {
-      aqiColorClass(status) {
+      aqiColorClass (status) {
         let statusColor = this.rangeData.filter(range => {
           return range.status === status
         })
@@ -155,7 +155,7 @@
 
         return statusColor[0].colorClass
       },
-      clickZone(site) {
+      clickZone (site) {
         this.currentSiteName = site
         this.aqiData.forEach(data => {
           if (data.SiteName === site) data.active = !data.active
@@ -163,25 +163,23 @@
       }
     },
     watch: {
-      currentCountyName() {
+      currentCountyName () {
         this.currentSiteName = ''
       }
     },
-    mounted() {
+    mounted () {
       let api =
-        'https://opendata.epa.gov.tw/webapi/api/rest/datastore/355000000I-000259?sort=SiteName&offset=0&limit=1000'
+        'https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1000&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&sort=ImportDate%20desc&format=json'
 
-      fetchJsonp(api)
+      fetch(api)
         .then(res => {
           return res.json()
         })
         .then(res => {
-          if (!res.success) return false
-          this.aqiData = res.result.records.map(data => {
+          this.aqiData = res.records.map(data => {
             data.active = false
             return data
           })
-          // console.log(res.result.records)
         })
         .catch(ex => {
           console.log('parsing failed', ex)
